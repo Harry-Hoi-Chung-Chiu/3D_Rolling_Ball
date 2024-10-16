@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "3D_Rolling_Ball.sln"
+    "dotnet.defaultSolution": "3D_Rolling_Ball.sln",
+    "dotnet.preferCSharpExtension": true
 }
