@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Event not triggered!");
+            Debug.Log("Event not addtriggered!");
         }
     }
 }
