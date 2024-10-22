@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public GameObject enemyObject;
 
     private Rigidbody rb;
     private int count;
@@ -21,6 +22,13 @@ public class PlayerController : MonoBehaviour
         count = 0;
         SetCountText();
         winTextObject.SetActive(false);
+        enemyObject.SetActive(false);
+    }
+
+    IEnumerator WaitForFunction()
+    {
+        yield return new WaitForSeconds(5);
+        // Debug.Log("Hello!");  
     }
 
     void OnMove(InputValue movementValue)
@@ -37,6 +45,7 @@ public class PlayerController : MonoBehaviour
         if (count >= 13)
         {
             winTextObject.SetActive(true);
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         }
     }
     void FixedUpdate()
@@ -52,12 +61,17 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             count = count + 1;
-            Debug.Log("Event triggered!!!");
             SetCountText();
         }
-        else
-        {
-            Debug.Log("Event not addtriggered!");
+    }
+
+        private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy")){
+            // Debug.Log("You Lose!");
+            Destroy(gameObject);
+            winTextObject.SetActive(true);
+            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
         }
     }
 }
